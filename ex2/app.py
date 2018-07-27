@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask import render_template
 from db import *
+import json
 
 
 app = Flask(__name__)
@@ -15,7 +16,8 @@ def returnEvents():
     conn = sqlite3.connect('example.db')
     result = getEvents(conn.cursor())
     conn.close()
-    return str(result)
+    print(type(result))
+    return json.dumps(result)
 
 
 ##
@@ -26,7 +28,7 @@ def returnEventById(id):
     conn = sqlite3.connect('example.db')
     result = getEventById(conn.cursor(), id)
     conn.close()
-    return str(result)
+    return json.dumps(result)
 
 
 ##
@@ -38,4 +40,4 @@ def returnCreatedEvent(start, end, label, category):
     result = createEvent(conn.cursor(), start, end, label, category)
     # conn.commit()
     conn.close()
-    return str(result)
+    return json.dumps(result)
