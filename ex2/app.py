@@ -7,7 +7,6 @@ import json
 
 app = Flask(__name__)
 
-#TODO: Return Dicts, JSON
 
 ##
 # List Events
@@ -40,5 +39,17 @@ def returnCreatedEvent(start, end, label, category):
     result = createEvent(conn.cursor(), start, end, label, category)
     # conn.commit()
     conn.close()
-    # return jsonify({'result':result})
-    return str(result)
+    return jsonify({'result':result})
+
+
+##
+# Export Event As Attachment By ID
+###################################
+@app.route('/api/events/<int:id>/export/', methods=['GET'])
+def exportEventById(id):
+    conn = sqlite3.connect('example.db')
+    result = getEventById(conn.cursor(), id)
+    conn.close()
+    json_result = jsonify({'result':result})
+    return json_result
+    # return 'export'
