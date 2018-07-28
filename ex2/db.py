@@ -16,7 +16,8 @@ def getEventById(cursor, str_id):
 def createEvent(cursor, start, end, label, category):
     cursor.execute("INSERT INTO events ('start', 'end', 'label', 'category') VALUES (?, ?, ?, ?);",
         (start, end, label, category))
-    query = cursor.execute('SELECT * FROM events WHERE start=?', start)
+    # query = cursor.execute('SELECT * FROM events WHERE start=?', start)
+    query = cursor.execute('SELECT * FROM events ORDER BY id DESC LIMIT 1;')
     result = [r for r in dict_gen(query)]
     return result
 

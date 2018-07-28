@@ -1,5 +1,6 @@
 from flask import Flask, request
 from flask import render_template
+from flask import jsonify
 from db import *
 import json
 
@@ -16,8 +17,7 @@ def returnEvents():
     conn = sqlite3.connect('example.db')
     result = getEvents(conn.cursor())
     conn.close()
-    print(type(result))
-    return json.dumps(result)
+    return jsonify({'result':result})
 
 
 ##
@@ -28,16 +28,17 @@ def returnEventById(id):
     conn = sqlite3.connect('example.db')
     result = getEventById(conn.cursor(), id)
     conn.close()
-    return json.dumps(result)
+    return jsonify({'result':result})
 
 
 ##
 # Create Event
 ###############
-@app.route('/api/events/<start>/<end>/<label>/<category>/', methods=['POST'])
+@app.route('/api/events/<string:start>/<string:end>/<string:label>/<string:category>/', methods=['POST'])
 def returnCreatedEvent(start, end, label, category):
     conn = sqlite3.connect('example.db')
     result = createEvent(conn.cursor(), start, end, label, category)
     # conn.commit()
     conn.close()
-    return json.dumps(result)
+    # return jsonify({'result':result})
+    return str(result)
