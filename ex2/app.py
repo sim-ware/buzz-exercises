@@ -6,6 +6,7 @@ from db import *
 from event_exporter import *
 
 
+
 app = Flask(__name__)
 
 
@@ -48,6 +49,18 @@ def returnCreatedEvent(start, end, label, category):
 
 
 ##
+# Delete Event
+###############
+@app.route('/api/events/<int:id>/delete/', methods=['GET'])
+def deleteEvent(id):
+    conn = sqlite3.connect('example.db')
+    removeEvent(conn.cursor(), id)
+    conn.commit()
+    conn.close()
+    return 'File deleted.'
+
+
+##
 # Export Event As Attachment By ID
 ###################################
 @app.route('/api/events/<int:id>/export/', methods=['GET'])
@@ -56,6 +69,6 @@ def exportEventById(id):
     result = getEventById(conn.cursor(), id)
     conn.close()
     e = mapEvent(result)
-    e = exportEvent(e)
     path = 'event.ics'
+    exportEvent(e, path)
     return send_file(path, as_attachment=True)
