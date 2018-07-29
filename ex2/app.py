@@ -3,7 +3,7 @@ from flask import render_template
 from flask import jsonify
 from flask import send_file
 from db import *
-import json
+from event_exporter import *
 
 
 app = Flask(__name__)
@@ -38,7 +38,11 @@ def returnEventById(id):
 def returnCreatedEvent(start, end, label, category):
     conn = sqlite3.connect('example.db')
     result = createEvent(conn.cursor(), start, end, label, category)
-    # conn.commit()
+    conn.commit()
+    try:
+        e = mapEvent(result)
+    except ValueError:
+        raise ValueError("Incorrect data format, should be YYYY-MM-DD")
     conn.close()
     return jsonify({'result':result})
 
@@ -51,8 +55,7 @@ def exportEventById(id):
     conn = sqlite3.connect('example.db')
     result = getEventById(conn.cursor(), id)
     conn.close()
-    json_result = jsonify({'result':result})
-    # return json_result
-    # return 'export'
-    path = 'my.ics'
+    e = mapEvent(result)
+    e = exportEvent(e)
+    path = 'event.ics'
     return send_file(path, as_attachment=True)
