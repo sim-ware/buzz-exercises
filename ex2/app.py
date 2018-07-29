@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask import render_template
 from flask import jsonify
+from flask import send_file
 from db import *
 import json
 
@@ -51,5 +52,7 @@ def exportEventById(id):
     result = getEventById(conn.cursor(), id)
     conn.close()
     json_result = jsonify({'result':result})
-    return json_result
+    # return json_result
     # return 'export'
+    path = 'my.ics'
+    return send_file(path, as_attachment=True)
