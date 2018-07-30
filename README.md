@@ -38,7 +38,6 @@ GET /api/events/:id/
 ```
 POST /api/events/:start/:end/:label/:category/
 # e.g.: /api/events/'2016-08-01T10:00:00Z'/'2016-08-01T15:00:00Z'/'Event one'/'blue'/
-
 ```
 - Creates an event with attributes. All attributes must be included, and written between single quotes.
 ```
