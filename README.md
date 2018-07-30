@@ -20,6 +20,7 @@ Run the following command to initialise a database. This creates a table called 
 ```
 python init_db.py
 ```
+Then run the following to start the API's Flask server
 ```
 export FLASK_APP=app.py
 export FLASK_ENV=development
