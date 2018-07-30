@@ -37,8 +37,10 @@ GET /api/events/:id/
 - Returns an event, specified by ID
 ```
 POST /api/events/:start/:end/:label/:category/
+# e.g.: /api/events/'2016-08-01T10:00:00Z'/'2016-08-01T15:00:00Z'/'Event one'/'blue'/
+
 ```
-- Creates an event with attributes. All attributes must be included, and written between single quotes. E.g.: http://localhost:5000/api/events/'2016-08-01T10:00:00Z'/'2016-08-01T15:00:00Z'/'Event one'/'blue'/
+- Creates an event with attributes. All attributes must be included, and written between single quotes.
 ```
 GET /api/events/:id/export/
 ```
