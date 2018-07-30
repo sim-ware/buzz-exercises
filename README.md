@@ -1,10 +1,8 @@
-# buzz-exercises
-Two Exercises
-
-# ex1
+# Ex1
 Binary Plateau
+![Screenshot](ex1.png)
 
-# ex2
+# Ex2
 Event API
 
 to run
