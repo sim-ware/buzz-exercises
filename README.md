@@ -2,9 +2,11 @@
 Two Exercises
 
 # ex1
-
+Binary Plateau
 
 # ex2
+Event API
+
 to run
 initialise db
 ```
