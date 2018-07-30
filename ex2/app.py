@@ -2,7 +2,7 @@ from flask import Flask, request
 from flask import render_template
 from flask import jsonify
 from flask import send_file
-from db import *
+from databaser import *
 from event_exporter import *
 
 
@@ -15,10 +15,10 @@ app = Flask(__name__)
 ##############
 @app.route('/api/events/', methods=['GET'])
 def returnEvents():
-    conn = sqlite3.connect('example.db')
-    result = getEvents(conn.cursor())
-    conn.close()
-    return jsonify({'result':result})
+    db = DataBaser('example.db')
+    db.getEvents()
+    db.conn.close()
+    return jsonify({'result':db.result})
 
 
 ##
@@ -26,10 +26,10 @@ def returnEvents():
 ##################
 @app.route('/api/events/<int:id>/', methods=['GET'])
 def returnEventById(id):
-    conn = sqlite3.connect('example.db')
-    result = getEventById(conn.cursor(), id)
-    conn.close()
-    return jsonify({'result':result})
+    db = DataBaser('example.db')
+    db.getEventById(id)
+    db.conn.close()
+    return jsonify({'result':db.result})
 
 
 ##
@@ -37,15 +37,16 @@ def returnEventById(id):
 ###############
 @app.route('/api/events/<string:start>/<string:end>/<string:label>/<string:category>/', methods=['POST'])
 def returnCreatedEvent(start, end, label, category):
-    conn = sqlite3.connect('example.db')
-    result = createEvent(conn.cursor(), start, end, label, category)
-    conn.commit()
-    try:
-        e = mapEvent(result)
-    except ValueError:
-        raise ValueError("Incorrect data format, should be YYYY-MM-DD")
-    conn.close()
-    return jsonify({'result':result})
+    db = DataBaser('example.db')
+    db.createEvent(start, end, label, category)
+    # try:
+    e = mapEvent(db.result)
+    # except ValueError:
+    #     raise ValueError("Incorrect data format, should be YYYY-MM-DD")
+    # except:
+    db.conn.commit()
+    db.conn.close()
+    return jsonify({'result':db.result})
 
 
 ##
@@ -53,11 +54,11 @@ def returnCreatedEvent(start, end, label, category):
 ###############
 @app.route('/api/events/<int:id>/delete/', methods=['GET'])
 def deleteEvent(id):
-    conn = sqlite3.connect('example.db')
-    result = removeEvent(conn.cursor(), id)
-    conn.commit()
-    conn.close()
-    return result
+    db = DataBaser('example.db')
+    db.removeEvent(id)
+    db.conn.commit()
+    db.conn.close()
+    return db.result
 
 
 ##
@@ -65,10 +66,10 @@ def deleteEvent(id):
 ###################################
 @app.route('/api/events/<int:id>/export/', methods=['GET'])
 def exportEventById(id):
-    conn = sqlite3.connect('example.db')
-    result = getEventById(conn.cursor(), id)
-    conn.close()
-    e = mapEvent(result)
+    db = DataBaser('example.db')
+    db.getEventById(id)
+    db.conn.close()
     path = 'event.ics'
+    e = mapEvent(db.result)
     exportEvent(e, path)
     return send_file(path, as_attachment=True)
