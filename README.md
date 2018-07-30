@@ -30,23 +30,23 @@ The following endpoints are available:
 ```
 GET /api/events/
 ```
--Returns all events in Database
+- Returns all events in Database
 ```
 GET /api/events/:id/
 ```
--Returns an event, specified by ID
+- Returns an event, specified by ID
 ```
 POST /api/events/:start/:end/:label/:category/
 ```
--Creates an event with attributes. All attributes must be included, and written between single quotes. E.g.: http://localhost:5000/api/events/'2016-08-01T10:00:00Z'/'2016-08-01T15:00:00Z'/'Event one'/'blue'/
+- Creates an event with attributes. All attributes must be included, and written between single quotes. E.g.: http://localhost:5000/api/events/'2016-08-01T10:00:00Z'/'2016-08-01T15:00:00Z'/'Event one'/'blue'/
 ```
 GET /api/events/:id/export/
 ```
--Exports an event as an ICS file. Event specified by ID.
+- Exports an event as an ICS file. Event specified by ID.
 ```
 GET /api/events/:id/delete/
 ```
--Deletes an event, specified by ID
+- Deletes an event, specified by ID
 
 ## Notes
 SQLite is convenient because it doesn’t require setting up a separate database server and is built-in to Python.
