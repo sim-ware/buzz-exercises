@@ -11,7 +11,6 @@ class TestDb(unittest.TestCase):
         db = DataBaser('test.db')
         #
         db.getEvents()
-        # res = len(db.result)
         self.assertEqual(len(db.result), 5)
         #
         db.conn.close()
@@ -56,7 +55,6 @@ class TestDb(unittest.TestCase):
         category = 'black'
         db.createEvent(start, end, label, category)
         db.removeEvent('6')
-        # res = getEvents(conn.cursor())
         db.getEvents()
         self.assertEqual(len(db.result), 5)
         #

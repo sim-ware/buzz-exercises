@@ -39,11 +39,7 @@ def returnEventById(id):
 def returnCreatedEvent(start, end, label, category):
     db = DataBaser('example.db')
     db.createEvent(start, end, label, category)
-    # try:
     e = mapEvent(db.result)
-    # except ValueError:
-    #     raise ValueError("Incorrect data format, should be YYYY-MM-DD")
-    # except:
     db.conn.commit()
     db.conn.close()
     return jsonify({'result':db.result})
