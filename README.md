@@ -38,7 +38,7 @@ GET /api/events/:id/
 ```
 POST /api/events/:start/:end/:label/:category/
 ```
--Creates an event with attributes. All attributes must be included, and written between single quotes. E.g.: 'http://localhost:5000/api/events/'2016-08-01T10:00:00Z'/'2016-08-01T15:00:00Z'/'Event one'/'blue'/''
+-Creates an event with attributes. All attributes must be included, and written between single quotes. E.g.: http://localhost:5000/api/events/'2016-08-01T10:00:00Z'/'2016-08-01T15:00:00Z'/'Event one'/'blue'/
 ```
 GET /api/events/:id/export/
 ```
