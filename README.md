@@ -55,3 +55,5 @@ I used SQLite3 for my database, as it didn't require setting up a separate datab
 I used Flask for similar reasons - it is lightweight and simple to configure, and consequently the code is easy to read and debug.
 
 For testing the API responses, I used PostMan. It has a GUI for testing API's, making it easy to enter requests and see the results. It was especially helpful for testing if the .ics file was being exported, as it rendered the file rather than requiring me to open it externally.
+
+![Screenshot](ex2.png)
