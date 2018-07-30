@@ -6,10 +6,21 @@ Two Exercises
 
 # ex2
 to run
+initialise db
+```
+python init_db.py
+```
 ```
 export FLASK_APP=app.py
 export FLASK_ENV=development
 flask run
+```
+to test
+```
+cd test
+```
+```
+python -m unittest discover
 ```
 
 SQLite is convenient because it doesn’t require setting up a separate database server and is built-in to Python.

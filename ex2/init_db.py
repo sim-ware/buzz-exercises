@@ -20,5 +20,3 @@ for row in c.execute('SELECT * FROM events'):
     print(row)
 
 conn.close()
-
-c.execute("DELETE FROM events WHERE id=9")

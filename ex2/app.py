@@ -54,10 +54,10 @@ def returnCreatedEvent(start, end, label, category):
 @app.route('/api/events/<int:id>/delete/', methods=['GET'])
 def deleteEvent(id):
     conn = sqlite3.connect('example.db')
-    removeEvent(conn.cursor(), id)
+    result = removeEvent(conn.cursor(), id)
     conn.commit()
     conn.close()
-    return 'File deleted.'
+    return result
 
 
 ##

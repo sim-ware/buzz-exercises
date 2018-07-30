@@ -1,20 +1,15 @@
 import unittest
-from db import *
+import sys
+sys.path.append("..")
+from databaser import *
 from event_exporter import *
 
 
 
 class TestDb(unittest.TestCase):
-    """
-    Our basic test class
-    """
 
     def test_mapEvent(self):
-        """
-        The actual test.
-        Any method which starts with ``test_`` will considered as a test case.
-        """
-        conn = sqlite3.connect('example.db')
+        conn = sqlite3.connect('test.db')
         res = getEventById(conn.cursor(), 1)
         e = Event()
         e = mapEvent(res)
@@ -26,11 +21,7 @@ class TestDb(unittest.TestCase):
 
 
     def test_exportEvent(self):
-        """
-        The actual test.
-        Any method which starts with ``test_`` will considered as a test case.
-        """
-        conn = sqlite3.connect('example.db')
+        conn = sqlite3.connect('test.db')
         res = getEventById(conn.cursor(), 1)
         e = Event()
         e = mapEvent(res)
