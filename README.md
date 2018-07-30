@@ -43,22 +43,15 @@ POST /api/events/:start/:end/:label/:category/
 ```
 GET /api/events/:id/export/
 ```
-- Exports an event as an ICS file. Event specified by ID.
+- Exports an event as an ICS file. Event specified by ID. Works with iCal.
 ```
 GET /api/events/:id/delete/
 ```
 - Deletes an event, specified by ID
 
 ## Notes
-SQLite is convenient because it doesn’t require setting up a separate database server and is built-in to Python.
+I used SQLite3 for my database, as it didn't require setting up a separate database server, and is in-built to Python. For the problem at hand it seemed like a simple and clear solution to the problem.
 
-Why flask? Lightweight, simple frame-work. lack of frills means that it's easy to debug
+I used Flask for similar reasons - it is lightweight and simple to configure, and consequently the code is easy to read and debug.
 
-I used PostMan to test API responses- intuitive interface, stops me from saving/downloading ics files a lot as it renders them instead.
-, and verified them in browser using Firefox - cool and clean UI, and needed to test it through more common usepoint, and check attachment downloadability and whether they open
-
-what would I do with more time?
-complete all features
-add setup and teardown methods to refactor tests better
-put all of the module and class code into its own folder
-maybe have the db_init script run automatically at start
+For testing the API responses, I used PostMan. It has a GUI for testing API's, making it easy to enter requests and see the results. It was especially helpful for testing if the .ics file was being exported, as it rendered the file rather than requiring me to open it externally.
