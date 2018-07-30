@@ -43,7 +43,7 @@ POST /api/events/:start/:end/:label/:category/
 ```
 GET /api/events/:id/export/
 ```
-- Exports an event as an ICS file. Event specified by ID. Works with iCal.
+- Exports an event as an ICS file. Event specified by ID. Works with iCal
 ```
 GET /api/events/:id/delete/
 ```
